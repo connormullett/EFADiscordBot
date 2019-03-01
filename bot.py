@@ -6,6 +6,7 @@ import asyncio
 import sys
 import requests
 
+from datetime import datetime
 from discord.ext import commands
 
 
@@ -40,7 +41,13 @@ def echo(message):
 @asyncio.coroutine
 def dad_joke():
     headers = {'Accept': 'application/json'}
-
+    url = 'https://icanhazdadjoke.com/'
+    response = requests.get(url, headers=headers).json()
+    if response['status'] == 200:
+        yield from bot.say(response['joke'])
+    else:
+        print(f"JOKE COMMAND FAILED AT {datetime.now()} "\
+                "STATUS CODE {response['status']}")
 
 
 bot.run('NTUwODgxMjU1MjYxMjA4NTg2.D1to-Q.cuVv2UdHZfqGmc5D35GBUROUtDI')
