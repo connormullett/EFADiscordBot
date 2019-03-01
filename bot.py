@@ -2,16 +2,19 @@
 
 import discord
 import asyncio
+# import configparser
 
-import sys
+import sys, os
 import requests
 
 from datetime import datetime
 from discord.ext import commands
 
 
-desc = '''Discord Bot For Eleven Fifty Academy'''
+config = configparser.ConfigParser()
+confg.read('config.ini')
 
+desc = '''Discord Bot For Eleven Fifty Academy'''
 bot = commands.Bot(command_prefix='~', description=desc)
 
 
@@ -52,5 +55,11 @@ def dad_joke():
                 'I\'m a bad bot :(')
 
 
-bot.run('NTUwODgxMjU1MjYxMjA4NTg2.D1to-Q.cuVv2UdHZfqGmc5D35GBUROUtDI')
+@bot.command(name='help')
+@asyncio.coroutine
+def display_help():
+    pass
+
+
+bot.run(os.getenv('DISCORD'))
 
