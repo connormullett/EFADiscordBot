@@ -48,6 +48,8 @@ def dad_joke():
     else:
         print(f"JOKE COMMAND FAILED AT {datetime.now()} "\
                 "STATUS CODE {response['status']}")
+        yield from bot.say('I couldn\'t come up with a joke because ' \
+                'I\'m a bad bot :(')
 
 
 bot.run('NTUwODgxMjU1MjYxMjA4NTg2.D1to-Q.cuVv2UdHZfqGmc5D35GBUROUtDI')
