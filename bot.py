@@ -11,9 +11,6 @@ from datetime import datetime
 from discord.ext import commands
 
 
-# config = configparser.ConfigParser()
-# confg.read('config.ini')
-
 desc = '''Discord Bot For Eleven Fifty Academy'''
 bot = commands.Bot(command_prefix='~', description=desc)
 
@@ -57,12 +54,6 @@ def dad_joke():
                 "STATUS CODE {response['status']}")
         yield from bot.say('I couldn\'t come up with a joke because ' \
                 'I\'m a bad bot :(')
-
-
-# @bot.command(name='help')
-# @asyncio.coroutine
-# def display_help():
-#     pass
 
 
 bot.run(os.getenv('DISCORD'))
