@@ -2,7 +2,9 @@
 
 import discord
 import asyncio
+
 import sys
+import requests
 
 from discord.ext import commands
 
@@ -25,5 +27,21 @@ def on_ready():
 def test():
     yield from bot.say('Test SUXful!')
 
-bot.run('NTUwODgxMjU1MjYxMjA4NTg2.D1o3uQ.nVoWclXLH_czso1We9lJ3owA-As')
+
+@bot.command()
+@asyncio.coroutine
+def echo(message):
+    message = yield from bot.say(f'echoing: {message}')
+    if message:
+        yield from bot.say('Test Successful')
+
+
+@bot.command(name='joke')
+@asyncio.coroutine
+def dad_joke():
+    headers = {'Accept': 'application/json'}
+
+
+
+bot.run('NTUwODgxMjU1MjYxMjA4NTg2.D1to-Q.cuVv2UdHZfqGmc5D35GBUROUtDI')
 
