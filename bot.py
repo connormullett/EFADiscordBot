@@ -11,8 +11,8 @@ from datetime import datetime
 from discord.ext import commands
 
 
-config = configparser.ConfigParser()
-confg.read('config.ini')
+# config = configparser.ConfigParser()
+# confg.read('config.ini')
 
 desc = '''Discord Bot For Eleven Fifty Academy'''
 bot = commands.Bot(command_prefix='~', description=desc)
@@ -34,10 +34,14 @@ def test():
 
 @bot.command()
 @asyncio.coroutine
-def echo(message):
-    message = yield from bot.say(f'echoing: {message}')
-    if message:
-        yield from bot.say('Test Successful')
+def echo(*args):
+    print(args)
+    if not args:
+        yield from bot.say('ERROR: No message supplied')
+    for message in args:
+        message = yield from bot.say(f'echoing: {message}')
+        if message:
+            yield from bot.say('Test Successful')
 
 
 @bot.command(name='joke')
@@ -55,10 +59,10 @@ def dad_joke():
                 'I\'m a bad bot :(')
 
 
-@bot.command(name='help')
-@asyncio.coroutine
-def display_help():
-    pass
+# @bot.command(name='help')
+# @asyncio.coroutine
+# def display_help():
+#     pass
 
 
 bot.run(os.getenv('DISCORD'))
