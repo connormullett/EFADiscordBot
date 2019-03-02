@@ -13,9 +13,9 @@ instance_id = sys.argv[2]
 
 ec2 = boto3.client('ec2')
 
-# describe instances
-response = ec2.describe_instances()
-print(response)
+## describe instances
+# response = ec2.describe_instances()
+# print(response)
 
 
 def dry_run():
