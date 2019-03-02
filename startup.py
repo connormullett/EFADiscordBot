@@ -20,7 +20,7 @@ print(response)
 
 def dry_run():
     try:
-        ec2.start_instances(InstanceIds=instance_id, DryRun=True)
+        ec2.start_instances(InstanceIds=[instance_id], DryRun=True)
     except ClientError as e:
         if 'DryRunOperation' not in str(e):
             raise
