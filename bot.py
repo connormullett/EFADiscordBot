@@ -2,13 +2,13 @@
 
 import discord
 import asyncio
-# import configparser
 
 import sys, os
 import requests
 
 from datetime import datetime
 from discord.ext import commands
+from clint.textui import puts, colored
 
 
 desc = '''Discord Bot For Eleven Fifty Academy'''
@@ -44,20 +44,32 @@ def echo(*args):
 @bot.command(name='joke', help='print a dad joke')
 @asyncio.coroutine
 def dad_joke():
-    sys.stdout.write(f'[{datetime.now()}] - Dad joke requested from' \
-            f'{bot.get_server}')
+    puts('[%s] - Dad Joke requested \n' % (datetime.now()))
     headers = {'Accept': 'application/json'}
     url = 'https://icanhazdadjoke.com/'
     response = requests.get(url, headers=headers).json()
     if response['status'] == 200:
+        puts(colored.green('[%s] - Dad joke sent to server' % (datetime.now())))
         yield from bot.say(response['joke'])
-        sys.stdout.write(f'[{datetime.now()}] - Dad joke sent to' \
-                f'{bot.get_server}')
     else:
-        sys.stdout.write(f"JOKE COMMAND FAILED AT {datetime.now()} "\
-                "STATUS CODE {response['status']}")
+        puts(colored.red('[%s] - ERROR RETRIEVING DAD JOKE '
+                         'STATUS CODE %') % (datetime.now(), response.status_code))
         yield from bot.say('I couldn\'t come up with a joke because ' \
                 'I\'m a bad bot :(')
+
+
+@bot.command(name='dog', help='send a random dog image')
+@asyncio.coroutine
+def dog():
+    puts('[%s] - Dog photo requested' % (datetime.now()))
+    response = requests.get('https://random.dog/woof.json').json()
+    dog_file = response.get('url', None)
+    if not dog_file:
+        yield from bot.say('I couldn\'t find a dog image cause im a bad bot :(')
+        puts(colored.red('[%s] - Failed to retrieve dog image'))
+    else:
+        yield from bot.say(dog_file)
+        puts(colored.green('[%s] - File sent Succesffully'))
 
 
 bot.run(os.getenv('DISCORD'))
