@@ -5,7 +5,7 @@ asyncio==3.4.3
 awscli==1.16.116
 boto3==1.9.106
 botocore==1.12.106
-certifi==2018.11.29
+certifi==2022.12.7
 chardet==3.0.4
 clint==0.5.1
 colorama==0.3.9
